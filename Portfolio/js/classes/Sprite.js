@@ -58,10 +58,7 @@ class Sprite {
      * 
      * if the image can flip, do the alteration
      */
-    /**Flips the image, assuming it was made in such a way */
-    flipSprite(){
-       
-    }
+    
 
     overlap(){
         if(player.hitbox.position.x + player.hitbox.width > this.position.x

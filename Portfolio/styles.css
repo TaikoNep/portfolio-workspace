@@ -90,3 +90,8 @@ img{
     height: 600px;
     width: 300px;
 }
+
+#birthday {
+    color: red;
+    font-size: 80px;
+}
