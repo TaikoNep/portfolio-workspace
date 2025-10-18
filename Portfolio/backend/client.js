@@ -3,22 +3,28 @@ fetch("http://localhost:3000/api/users").then((response) => {return response.jso
 
 
 
-// Make a new chick named Chiquita
+// Make a new user named Chiquita
 fetch("http://localhost:3000/api/user", 
     {method:"POST", 
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(
-            {name: "Chiquita", points: "1"}) 
+            {name: "Chiquita"}) 
         }).then((response) => {console.log(response.json())})
 
-// Update Chiquita to be older
-fetch("http://localhost:3000/api/user/3", {method:"PUT", headers:{'Content-Type':'application/json'},body:JSON.stringify({name: "Chiquita", points: "2"}) }).then((response) => {console.log(response.json())})
+//Give user an emerald
+fetch("http://localhost:3000/api/user/68f1d17f70b9925d72a2acd6/emeralds", 
+    {method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+            { emerald: "green" })
+        }).then(res => res.json()).then(data => console.log("Updated user:", data))
+
 
 // Fetch only Chiquita
-fetch("http://localhost:3000/api/user/1").then((response) => {return response.json()}).then((response) =>{req = response}).then(() => {console.log(req);});
+fetch("http://localhost:3000/api/user/68f11b5f87cab0fc369e5f07").then((response) => {return response.json()}).then((response) =>{req = response}).then(() => {console.log(req);});
 
-// Delete Chiquita
-fetch("http://localhost:3000/api/user/68f11b5f87cab0fc369e5f07", {method:"DELETE"}).then((response) => {console.log(response.json())})
+// Delete a user
+fetch("http://localhost:3000/api/user", {method:"DELETE"}).then((response) => {console.log(response.json())})
 
 //Delete all users
 fetch("http://localhost:3000/api/users", {method:"DELETE"}).then((response) => {console.log(response.json())})
