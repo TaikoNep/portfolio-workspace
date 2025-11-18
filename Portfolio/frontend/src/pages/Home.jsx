@@ -1,63 +1,53 @@
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-    useEffect(() => {
-        const scripts = [
-            '/game/utils.js',
-            '/game/classes/CollisionBlock.js',
-            '/game/classes/Sprite.js',
-            '/game/classes/Player.js',
-            '/game/classes/LinkZone.js',
-            '/game/data/collisions.js',
-            '/game/SonicPortfolioStage.js',
-            '/game/script.js'
-        ];
     
-
-    // Create and append scripts to the body
-    const addedScripts = scripts.map(src => {
-      const s = document.createElement('script');
-      s.src = src;
-      s.async = false; // Important: keeps order
-      document.body.appendChild(s);
-      return s;
-    });
-
-    // Cleanup if Home unmounts
-    return () => {
-      addedScripts.forEach(s => document.body.removeChild(s));
-    };
-  }, []);
-
-
   return (
-    <div className="home">
-      <nav>
-            <ul>
-                <li><a href = "./Home.jsx">Home</a></li>
-                <li><a href = "./About.jsx">About</a>
-                    <ul class = "dropdown">
-                        <li><a href = "#">Skills</a></li>
-                        <li><a href = "#">Contact</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href = "./Projects.jsx">Projects</a>
-                    <ul class="dropdown">
-                        <li><a href ="#">Past Projects</a></li>
-                        <li><a href ="#">Current Projects</a></li>
+      <div className="home">
+        <nav>
+              <ul>
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to= "/about">About</Link>
+                      <ul className = "dropdown">
+                          
+                      </ul>
+                  </li>
+                  <li>
+                      <Link to= "/projects">Projects</Link>
+                      <ul className="dropdown">
 
-                    </ul>
-                </li>
-                <li><a href = "">Contact</a></li>
-            </ul>
-        </nav>
+                      </ul>
+                  </li>
+                  
+              </ul>
+          </nav>
 
-        <canvas class = "flex-container" id ="myCanvas"></canvas>
-        
-        
+          {/*Add game here*/}
+            <iframe
+              src="/game.html"
+              width="1024"
+              height="512"
+              style={{ border: "none" }}
+              title="Portfolio Game"
+            ></iframe>
+          <canvas className="flex-container" id="myCanvas"></canvas>
+          
+          <h1>Hello!</h1>
 
-    </div>
-    
+          <p>
+              Welcome to my 'main' page for my portfolio!
+              The controls are quite simple! <span className = "whisper">Seeing how I haven't finished them yet.</span>
+              To move, use the 'w', 'a', 's', and 'd' keys!
+              Press Enter when your character is within a blue box to open a new page!
+          </p>
+
+          <footer>
+              <div /*style='position:absolute; bottom:0px; left: 40%;'*/>
+                  <h3>Credits and Resources!</h3>
+                  <p>Sprites By: Shinbaloonba</p> 
+                  <p>All characters are (&copy) to their respective owners</p>
+              </div> 
+          </footer>
+      </div>
   );
 }

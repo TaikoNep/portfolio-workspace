@@ -7,7 +7,7 @@ const linkZone1 = new LinkZone({
     },
     width: 100,
     height: 100,
-    link: 'Portfolio/about.html'
+    link: '/about'
 
 })
 
@@ -18,7 +18,7 @@ const linkZone2 = new LinkZone({
     },
     width: 100,
     height: 100,
-    link: 'Portfolio/projects.html'
+    link: '/projects'
 
 })
 
@@ -125,21 +125,21 @@ const player = new Player({
         y:0,
     },
     collisionBlocks,
-    imageSrc: "./images/sonic/idle.png",
+    imageSrc: "/game/images/sonic/idle.png",
     frameRate: 1,
     animations: {
         idle: {
-            imageSrc: "./images/sonic/idle.png",
+            imageSrc: "/game/images/sonic/idle.png",
             frameRate: 1,
             frameBuffer: 3
         },
         jog1: {
-            imageSrc: "./images/sonic/jog1.png",
+            imageSrc: "/game/images/sonic/jog1.png",
             frameRate: 6,
             frameBuffer: 25,
         },
         Jump: {
-            imageSrc: "./images/sonic/jump.png",
+            imageSrc: "/game/images/sonic/jump.png",
             frameRate: 6,
             frameBuffer: 25
         },
@@ -162,7 +162,7 @@ const background = new Sprite ({
         x: 0,
         y: 0,
     },
-    imageSrc: './images/sonicStage.png',
+    imageSrc: '/game/images/sonicStage.png',
 })
 
 
@@ -171,8 +171,8 @@ const background = new Sprite ({
  */
 //import sonicStage from 'img/sonicStage.png';
 const imageUrls = [
-    './images/sonicStage.png',
-    './images/sonic/idle.png'
+    '/game/images/sonicStage.png',
+    '/game/images/sonic/idle.png'
 ]
 
 let loadedImages = 0;
