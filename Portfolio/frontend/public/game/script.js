@@ -125,21 +125,21 @@ const player = new Player({
         y:0,
     },
     collisionBlocks,
-    imageSrc: "Portfolio/img/sonic/idle.png",
+    imageSrc: "./images/sonic/idle.png",
     frameRate: 1,
     animations: {
         idle: {
-            imageSrc: "Portfolio/img/sonic/idle.png",
+            imageSrc: "./images/sonic/idle.png",
             frameRate: 1,
             frameBuffer: 3
         },
         jog1: {
-            imageSrc: "Portfolio/img/sonic/jog1.png",
+            imageSrc: "./images/sonic/jog1.png",
             frameRate: 6,
             frameBuffer: 25,
         },
         Jump: {
-            imageSrc: "Portfolio/img/sonic/jump.png",
+            imageSrc: "./images/sonic/jump.png",
             frameRate: 6,
             frameBuffer: 25
         },
@@ -162,7 +162,7 @@ const background = new Sprite ({
         x: 0,
         y: 0,
     },
-    imageSrc: 'Portfolio/img/sonicStage.png',
+    imageSrc: './images/sonicStage.png',
 })
 
 
@@ -171,8 +171,8 @@ const background = new Sprite ({
  */
 //import sonicStage from 'img/sonicStage.png';
 const imageUrls = [
-    'Portfolio/img/sonicStage.png',
-    'Portfolio/img/sonic/idle.png'
+    './images/sonicStage.png',
+    './images/sonic/idle.png'
 ]
 
 let loadedImages = 0;
