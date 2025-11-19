@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import ChaosEmerald from "../ChaosEmerald"
+
 export default function About() {
 
     return(
@@ -23,6 +25,25 @@ export default function About() {
           </nav>
 
           <h1>About Me</h1>
+            <ChaosEmerald 
+                type="green"
+                src="/images/emeralds/emerald_blue.png"
+                alt="Blue Chaos Emerald"
+                color="blue"
+            />
+
+
+            <p>Hello! </p>
+
+            <img src= "./img/pfp.png" alt="Avatar"/>
+
+            <h2>Education</h2>
+
+            <h2>Likes:</h2>
+
+            <h2>Dislikes:</h2>
+
+            <p>Testing About file. Test test</p>
         </div>
     );
 

@@ -27,4 +27,4 @@ fetch("http://localhost:3000/api/user/68f11b5f87cab0fc369e5f07").then((response)
 fetch("http://localhost:3000/api/user", {method:"DELETE"}).then((response) => {console.log(response.json())})
 
 //Delete all users
-fetch("http://localhost:3000/api/users", {method:"DELETE"}).then((response) => {console.log(response.json())})
+fetch("http://localhost:5173/api/users", {method:"DELETE"}).then((response) => {console.log(response.json())})

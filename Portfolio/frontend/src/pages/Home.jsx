@@ -30,7 +30,6 @@ export default function Home() {
               style={{ border: "none" }}
               title="Portfolio Game"
             ></iframe>
-          <canvas className="flex-container" id="myCanvas"></canvas>
           
           <h1>Hello!</h1>
 

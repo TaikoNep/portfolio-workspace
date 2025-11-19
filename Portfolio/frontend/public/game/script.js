@@ -157,6 +157,7 @@ const keys = {
     },
 }
 
+
 const background = new Sprite ({
     position: {
         x: 0,
