@@ -3,7 +3,7 @@ import React from "react";
 function ChaosEmerald(props) {  
 
    async function handleClick(){
-       fetch("http://localhost:3000/api/user/68f1d17f70b9925d72a2acd6/emeralds", 
+       fetch("http://localhost:5000/api/user/68f1d17f70b9925d72a2acd6/emeralds", 
     {method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(

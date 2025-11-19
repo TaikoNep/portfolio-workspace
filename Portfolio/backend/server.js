@@ -1,9 +1,16 @@
 // server.js
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 const express = require("express");
+//import express from "express";
 const app = express();
 
 const mongoose = require("mongoose");
 const cors = require("cors");
+
+import path from "path";
+import { fileURLToPath } from "url";
 
 main();
 
@@ -13,12 +20,29 @@ async function main(){
    app.use(express.json());
    app.use(cors());
    
+   
+
+   const PORT = 5000;
+   //app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+   // const __filename = fileURLToPath(import.meta.url);
+   // const __dirname = path.dirname(__filename);app.use(express.static(path.join(__dirname, "../frontend/dist")));app.get('/{*any}', (req, res) => {
+   // res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+   // });
+
+
+
    const userSchema = new mongoose.Schema({
       name: {type: String, required: false},
       emeralds: { type: [String], default: [] }
    })
    
    const User = mongoose.model("User", userSchema);
+
+   app.get("/api", (req, res) => {
+      res.json({ message: "Hello from Express backend!" });
+   });
    
    app.get("/", function(req, res) {
       res.send("<h1>Welcome to the player list!</h1>");
@@ -42,7 +66,7 @@ async function main(){
       newUser = req.body;
       console.log(newUser);
       id = req.params.id;
-      user = await User.findById(id);
+      let user = await User.findById(id);
       
       if(user){
          await User.updateOne({_id: id}, {$set: newUser});
@@ -56,7 +80,7 @@ async function main(){
       
    app.delete("/api/user/:id", async function (req, res){
       id = req.params.id;
-      user = await User.findById(id);
+      let user = await User.findById(id);
       
       if(user){
          try{
@@ -74,7 +98,7 @@ async function main(){
          })
          
    app.delete("/api/users", async function (req,res){
-      users = await User.find()
+      let users = await User.find();
       if(users){
          try{
             await User.deleteMany();
@@ -90,13 +114,13 @@ async function main(){
       })
             
    app.post("/api/user", async function (req, res){
-      user = await User.create(req.body);
+      let user = await User.create(req.body);
       res.send({"id": user["_id"], "user":user});
    });
          
    app.get("/api/users/:filter", async function(req,res) {
       const filter = JSON.parse(req.params.filter);
-      users;
+      let users;
       users = await User.find(filter);
       res.send(users);
       
@@ -111,7 +135,7 @@ async function main(){
    });
    
    app.get("/api/users", async function(req, res){
-      users = await User.find();
+      let users = await User.find();
       res.send(users);
    })
    
@@ -133,7 +157,15 @@ async function main(){
       }
    });
    
-   app.listen(3000, function(){console.log("Listening on port 3000...")})
+   
+   
+   //app.listen(5000, function(){console.log("Listening on port 5000...")})
+   const __filename = fileURLToPath(import.meta.url);
+   const __dirname = path.dirname(__filename);app.use(express.static(path.join(__dirname, "../frontend/dist")));app.get('/{*any}', (req, res) => {
+   res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+   });
+   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 }
       
          
