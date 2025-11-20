@@ -9,6 +9,8 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const cookieParser = require("cookie-parser");
+
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -18,20 +20,72 @@ async function main(){
    mongoose.connect('mongodb://localhost/newdb');
    
    app.use(express.json());
-   app.use(cors());
+   app.use(cors({
+      origin: "http://localhost:5173", 
+      credentials: true
+   }));
    
-   
+   app.use(cookieParser());
 
    const PORT = 5000;
-   //app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+   
 
+   //create cookie
+   app.get('/set_cookie', (req, res) => {
+      if(!req.cookies.user_id){ //check if user cookie is already present
+         const id = crypto.randomUUID(); //generate random id for this user
+         res.cookie("user_id", id, {
+            maxAge: 2592000,
+            httpOnly: true, // prevents client-side JavaScript from accessing the cookie, mitigating certain cross-site scripting attacks (XSS)
+            sameSite: "lax", //ensures cookie is only sent for requesting originating from the same site 
+         });
+      }
 
-   // const __filename = fileURLToPath(import.meta.url);
-   // const __dirname = path.dirname(__filename);app.use(express.static(path.join(__dirname, "../frontend/dist")));app.get('/{*any}', (req, res) => {
-   // res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
-   // });
+      res.send("Cookie set sucessful!");
+   });
 
+   //get cookie
+   app.get('/get_cookie', (req, res) =>{
+      const cookie = req.cookies['user_id']
+      res.send(`cookie value : ${cookie}`)
+   });
 
+   //clear cookie
+   app.get('/clear_cookie', (req, res) =>{
+      res.clearCookie('user_id');
+      res.send('cookie cleared sucessful')
+   });
+
+   app.get('/api/init', async (req, res) => {
+      try{
+         let userId = req.cookies.user_id;
+
+         if(!userId){
+            userId = crypto.randomUUID();
+            res.cookie("user_id", userId, {
+               maxAge: 2592000,
+               httpOnly: true,
+               sameSite: "lax",
+            });
+         }
+
+         let user = await User.findOne({name: userId}); //find mongodb user based on cookie
+
+         if(!user){
+            user = await User.create({
+               name: userId,
+               emeralds: [],
+            });
+         }
+
+         //return user
+         res.send({ id: user._id, user});
+         
+      } catch (err){
+         console.error("INIT ERROR:", err),
+         res.status(500).send({ error: 500, msg: "Server error"});
+      }
+   });
 
    const userSchema = new mongoose.Schema({
       name: {type: String, required: false},
@@ -39,6 +93,8 @@ async function main(){
    })
    
    const User = mongoose.model("User", userSchema);
+
+
 
    app.get("/api", (req, res) => {
       res.json({ message: "Hello from Express backend!" });
@@ -139,10 +195,10 @@ async function main(){
       res.send(users);
    })
    
-   app.patch("/api/user/:id/emeralds", async function(req,res){
+   app.patch("/api/user/emeralds", async function(req,res){
       const { emerald } = req.body;
       try {
-         const user = await User.findById(req.params.id);
+         const user = await User.findOne({name: req.cookies.user_id});
          if (!user) return res.status(404).send({ error: 404, msg: "User not found" });
          
          if (!user.emeralds.includes(emerald)) {

@@ -95,3 +95,14 @@ img{
     color: red;
     font-size: 80px;
 }
+
+
+.emerald-row {
+    display: flex;
+    gap: 8px;
+}
+
+.emerald-icon {
+    width: 40px;
+    height: 40px;
+}

@@ -1,3 +1,13 @@
+fetch("http://localhost:5000/api/test-cookie", 
+    {
+        method: "GET",
+        credentials: "include",
+    })
+  .then(res => res.json())
+  .then(data => console.log("Cookie test:", data))
+  .catch(err => console.error(err));
+
+
 // Fetch all of the users
 fetch("http://localhost:5000/api/users").then((response) => {return response.json()}).then((response) =>{req = response}).then(() => {console.log(req);});
 
@@ -40,3 +50,10 @@ fetch("http://localhost:5000/api/user", {
 .then(res => res.json())
 .then(data => console.log(data))
 .catch(err => console.error(err));
+
+
+const user = await fetch("http://localhost:5000/api/init", {
+  credentials: "include",
+}).then(r => r.json());
+
+console.log("Current user:", user);

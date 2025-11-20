@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ChaosEmerald from "../ChaosEmerald"
+import ChaosEmerald from "../ChaosEmerald";
 
 export default function About() {
 
@@ -26,7 +26,7 @@ export default function About() {
 
           <h1>About Me</h1>
             <ChaosEmerald 
-                type="green"
+                type="blue"
                 src="/images/emeralds/emerald_blue.png"
                 alt="Blue Chaos Emerald"
                 color="blue"

@@ -6,29 +6,27 @@ import Projects from "./pages/Projects.jsx";
 import { useEffect, useState } from "react";
 
 function App() {
-  
+  const [user, setUser] = useState(null);
 
-  // return (
-  //   <BrowserRouter>
-  //     <Routes>
-  //       <Route path="/" element={<Home />} />
-  //       <Route path="/about" element={<About />} />
-  //       <Route path="/projects" element={<Projects />} />
-  //     </Routes>
-  //   </BrowserRouter>
-  // );
-
-  const [message, setMessage] = useState("");  useEffect(() => {
-    fetch("http://localhost:5000/api")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
+  useEffect(() => {
+  fetch("http://localhost:5000/api/init", {
+    credentials: "include",
+  })
+    .then(res => res.json())
+    .then(data => {console.log("User initialized:", data);
+    setUser(data.user)});
   }, []);
 
+
   return (
-    <div>
-      <h1>Vite + Express Full Stack App</h1>
-      <p>{message}</p>
-    </div>
+    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+      </Routes>
+    </BrowserRouter>
   );
 
 }
