@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ChaosEmerald from "../ChaosEmerald";
+import ChaosEmerald from "../functions/ChaosEmerald";
 
 export default function Projects() {
 
@@ -60,7 +60,7 @@ export default function Projects() {
             />
 
             <ChaosEmerald 
-                type="cyam"
+                type="cyan"
                 src="/images/emeralds/emerald_cyan.png"
                 alt="Red Chaos Emerald"
                 color="cyan"

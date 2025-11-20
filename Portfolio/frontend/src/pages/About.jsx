@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ChaosEmerald from "../ChaosEmerald";
+import ChaosEmerald from "../functions/ChaosEmerald";
 
 export default function About() {
 

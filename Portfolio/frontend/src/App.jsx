@@ -6,20 +6,19 @@ import Projects from "./pages/Projects.jsx";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState("");
 
-  useEffect(() => {
-  fetch("http://localhost:5000/api/init", {
-    credentials: "include",
-  })
-    .then(res => res.json())
-    .then(data => {console.log("User initialized:", data);
-    setUser(data.user)});
-  }, []);
+  // useEffect(() => {
+  // fetch("http://localhost:5000/api/init", {
+  //   credentials: "include",
+  // })
+  //   .then(res => res.json())
+  //   .then(data => {console.log("User initialized:", data);
+  //   setUser(data.user)});
+  // }, []);
 
 
   return (
-    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />

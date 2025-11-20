@@ -13,7 +13,7 @@ fetch("http://localhost:5000/api/users").then((response) => {return response.jso
 
 
 
-// Make a new user named Chiquita
+// Make a new user 
 fetch("http://localhost:5000/api/user", 
     {method:"POST", 
         headers:{'Content-Type':'application/json'},
@@ -30,8 +30,7 @@ fetch("http://localhost:3000/api/user/68f1d17f70b9925d72a2acd6/emeralds",
         }).then(res => res.json()).then(data => console.log("Updated user:", data))
 
 
-// Fetch only Chiquita
-fetch("http://localhost:3000/api/user/68f11b5f87cab0fc369e5f07").then((response) => {return response.json()}).then((response) =>{req = response}).then(() => {console.log(req);});
+
 
 // Delete a user
 fetch("http://localhost:3000/api/user", {method:"DELETE"}).then((response) => {console.log(response.json())})
@@ -54,6 +53,4 @@ fetch("http://localhost:5000/api/user", {
 
 const user = await fetch("http://localhost:5000/api/init", {
   credentials: "include",
-}).then(r => r.json());
-
-console.log("Current user:", user);
+}).then(r => r.json()).then(console.log("Current user:", user));
